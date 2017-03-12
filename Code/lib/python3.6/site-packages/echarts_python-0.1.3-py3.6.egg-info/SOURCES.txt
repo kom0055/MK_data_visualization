@@ -1,0 +1,11 @@
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+docs/source/index.rst
+echarts/__init__.py
+echarts/datastructure.py
+echarts/option.py
+echarts/plot.j2
+tests/__init__.py
+tests/test_echart.py

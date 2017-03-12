@@ -1,0 +1,12 @@
+README.rst
+setup.cfg
+setup.py
+awesome_slugify.egg-info/PKG-INFO
+awesome_slugify.egg-info/SOURCES.txt
+awesome_slugify.egg-info/dependency_links.txt
+awesome_slugify.egg-info/requires.txt
+awesome_slugify.egg-info/top_level.txt
+slugify/__init__.py
+slugify/alt_translates.py
+slugify/main.py
+slugify/tests.py

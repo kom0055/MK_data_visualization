@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+
+{% block title %}分布地图{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+
+        
+        <h1>血清成分与地域的关系</h1>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<a href="/area" class="btn btn-primary btn-lg active" role="button">点击关闭分布地图</a>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+	<div id="main" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+    
+    
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="../static/echarts/echarts.js"></script>
+    
+    
+    <script type="text/javascript">
+    // Step:3 conifg ECharts's path, link to echarts.js from current page.
+    // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+    require.config({
+        paths: {
+            echarts: '../static/echarts'
+        }
+    });
+    
+    // Step:4 require echarts and use it in the callback.
+    // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+    require(
+        [
+            'echarts',
+            'echarts/chart/bar',
+            'echarts/chart/line',
+            'echarts/chart/map'
+        ],
+        function (ec) {
+            var myChart = ec.init(document.getElementById('main'));
+            option={
+                title : {
+                    text: '全国血清中成分含量不同状态的人群分布图',
+                    subtext: '',
+                    x:'center',
+                    textStyle:{
+                        frontSize:18,
+                        fontWeight:'bolder',
+                        color:'#00B2EE'
+                    },
+                    subtextStyle:{
+                        color:'#000'
+                    }
+                },
+                tooltip : {
+                    trigger: 'item',
+                    formatter: '{b}'
+                },
+                legend: {
+                    orient: 'vertical',
+                    x:'left',
+                    selected:{
+                        '过少':false,
+                        '过高':false,
+                        '适当':false
+                    },
+                    data:['过少','过高','适当']
+                },
+                dataRange:{
+                    min:0,
+                    max:0,
+                    x:'left',
+                    y:'bottom',
+                    text:['高','低'],
+                    calculable:true
+                },
+                series : [
+                    {
+                        name: '过少',
+                        type: 'map',
+                        mapType: 'china',
+                        roam:false,
+                        itemStyle:{
+                            normal:{label:{show:true}},
+                            emphasis:{label:{show:true}}
+                        },
+                        data:[
+                            
+                        ]
+                    },
+                    {
+                        name: '过高',
+                        type: 'map',
+                        mapType: 'china',
+                        roam:false,
+                        itemStyle:{
+                            normal:{label:{show:true}},
+                            emphasis:{label:{show:true}}
+                        },
+                        data:[
+                           
+                        ]
+                    },
+                    {
+                        name: '适当',
+                        type: 'map',
+                        mapType: 'china',
+                        roam:false,
+                        itemStyle:{
+                            normal:{label:{show:true}},
+                            emphasis:{label:{show:true}}
+                        },
+                        data:[
+                            
+                        ]
+                    }
+                ]
+            };
+            myChart.setOption(option);
+
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: "/viewmap", //把表单数据发送到/weather
+                data: null, // 发送的数据
+                dataType : "json",  //返回数据形式为json
+                async: false,
+                error: function(request) {
+                    alert("发送请求失败！");
+                },
+                success: function(result) {
+                    //console.log(result);
+                    
+                    
+                    option.series[0].data=result.data_less;
+                    option.series[1].data=result.data_larger; 
+                    option.series[2].data=result.data_proper;
+                    //option.dataRange.max=20;
+                    option.dataRange.max=result.people_num;
+                    option.title.subtext=result.key_component; 
+                    
+                    
+                    // 为echarts对象加载数据--------------
+                    myChart.hideLoading(); 
+                    myChart.setOption(option);
+
+                }
+            });
+        }
+    );
+    
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,60 @@
+<script src="{{ url_for('static', filename='js/jquery-1.8.3.min.js') }}"></script>  
+<script src="{{ url_for('static', filename='js/highcharts.js') }}"></script>  
+<script src="{{ url_for('static', filename='js/chartkick.js') }}"></script>  
+
+{% extends  "bootstrap/base.html" %}
+
+{% block head %}
+{{ super() }}
+<link rel="shortcut icon" href="{{ url_for('static',filename='image/ez.jpg') }}"
+      type="image/x-icon">
+<link rel="icon" href="{{ url_for('static',filename='image/ez.jpg') }}"
+      type="image/x-icon">
+{% endblock %}
+
+{% block title %}血清数据成分分析{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">首页</a>
+        </div>
+
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/sex">性别</a> </li>
+                <li><a href="/age">年龄</a> </li>
+                <li><a href="/area">地区</a> </li>
+            </ul>
+        </div>
+
+     
+
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+<div class="container">
+{% for mesaage in get_flashed_messages() %}
+<div class="alert alert_warning">
+<button type="button" class="close" data-dismiss="aler">&times;</button>
+{{ message }}
+</div>
+{%  endfor %}
+    {% block page_content %}{% endblock %}
+</div>
+{% endblock %}

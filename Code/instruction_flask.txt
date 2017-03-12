@@ -1,0 +1,21 @@
+
+python3.6 -m venv .
+
+source bin/activate
+pip install flask
+pip install --upgrade pip
+pip install flask-bootstrap
+pip install flask-script
+pip install flask-moment
+pip install flask-wtf
+pip install flask-mail
+pip install chartkick
+pip install flask-sqlalchemy
+pip install pymongo
+pip install Flask-Script
+pip install pymongo
+pip install mongoengine
+pip install gunicorn
+pip freeze > requirements.txt
+gunicorn -w4 -b0.0.0.0:5555 schoolflask:app
+pip install supervisor

@@ -1,0 +1,15 @@
+MANIFEST.in
+README.rst
+setup.cfg
+setup.py
+chartkick/__init__.py
+chartkick/ext.py
+chartkick/options.py
+chartkick/template.py
+chartkick.egg-info/PKG-INFO
+chartkick.egg-info/SOURCES.txt
+chartkick.egg-info/dependency_links.txt
+chartkick.egg-info/top_level.txt
+chartkick/js/chartkick.js
+chartkick/templatetags/__init__.py
+chartkick/templatetags/chartkick.py

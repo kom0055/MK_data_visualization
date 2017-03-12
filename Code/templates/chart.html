@@ -1,0 +1,13 @@
+
+{% extends "base.html" %}
+
+{% block title %}Chart{% endblock %}
+
+
+
+{% block content %}
+{% line_chart data %}
+{% bar_chart data with style="width:200px;height:20px;" %}
+{% pie_chart data %}
+{% column_chart data with min=0 max=100 %}
+{% endblock %}

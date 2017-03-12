@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}年龄{% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+    <div class="page-header">
+
+        
+        <h1>血清成分与年龄段的关系</h1>
+    </div>
+</div>
+
+
+<div style="width:400px;height:100px;float:left">
+{{ wtf.quick_form(form) }}
+</div>
+
+{% if text %}
+<div style="float:right;height: 100px">
+<h1 style="font-size:30px">您当前选择查看的类型是:{{text}},其正常范围是[{{data_min}},{{data_max}}]</h1>
+</div>
+<div style="width:600px;height:200px;float:left">
+<h1 style="font-size:25px">血清中{{text}}成分不同状态的人群比例图</h1>
+
+{% pie_chart data_sub %}
+
+
+<h1 style="font-size:25px">血清中{{text}}成分过高的不同年龄段条形图</h1>
+{% line_chart data_larger %}
+</div>
+
+<div style="width:600px;height:200px;float:right">
+<h1 style="font-size:25px">血清中{{text}}成分正常的不同年龄段条形图</h1>
+
+{% line_chart data_proper %}
+
+<h1 style="font-size:25px">血清中{{text}}成分过低的不同年龄段条形图</h1>
+{% line_chart data_less %}
+</div>
+{% else %}
+<div style="float:right;height: 100px">
+<h1 style="font-size:30px">您当前未选择任何成分</h1>
+</div>
+{% endif %}
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
